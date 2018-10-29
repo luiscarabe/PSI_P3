@@ -13,7 +13,7 @@ class WorkflowAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
 
 
-# Register your models here.
+# Register your models here.z
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Workflow, WorkflowAdmin)

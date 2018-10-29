@@ -27,7 +27,7 @@ class Category(models.Model):
 class Workflow(models.Model):
 	name = models.CharField(max_length=128, unique=True, blank=False)
 	slug = models.SlugField(unique=True)
-	descrciption = models.CharField(max_length=512, default="")
+	description = models.CharField(max_length=512, default="")
 	views = models.IntegerField()
 	downloads = models.IntegerField()
 	versionInit = models.CharField(max_length=128)
@@ -44,4 +44,3 @@ class Workflow(models.Model):
 
 	def __str__(self):# For Python 2, use __unicode__ too
 		return self.name
-
