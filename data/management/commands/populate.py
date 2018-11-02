@@ -14,6 +14,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
 import django
+from django.shortcuts import get_object_or_404
 from random import randint
 
 django.setup()
@@ -68,7 +69,7 @@ deserunt mollit anim id est laborum."""[init:end]
 
 	def addCategory(self, noCategories):
 		for i in range(0, noCategories):
-			c = Category.objects.get_or_create(name="category" + str(i),
+			c = Category.objects.get_or_create(name="category " + str(i),
 				tooltip=self.getParragraph(randint(0,50), randint(55, 100)))[0]
 			c.save()
 	
@@ -83,7 +84,8 @@ deserunt mollit anim id est laborum."""[init:end]
 
 	def addWorkflow(self, noWorkflows):
 		for i in range(0, noWorkflows):
-			w =  Workflow.objects.get_or_create(name="workflow" + str(i), 
+			r = randint(0, Category.objects.count()-1)
+			w =  Workflow.objects.get_or_create(name="workflow " + str(i) + "-" + str(r), 
 					views=randint(0, 100),
 					description=self.getParragraph(randint(50, 90), randint(100, 140)),
 					downloads=randint(0, 100),
@@ -91,7 +93,8 @@ deserunt mollit anim id est laborum."""[init:end]
 					client_ip=str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)),
 					keywords=self.getParragraph(randint(0,5), randint(0,20)),
 					json = self.getJson())[0]
-			w.category.add(Category.objects.get_or_create(name="category" + str(i))[0])
+			w.category.add(get_object_or_404(Category, name="category " + str(i % Category.objects.count())))
+			w.category.add(get_object_or_404(Category, name="category " + str(r)))
 			w.save()
 
 		# create 13 workflows  <<<<<<<<<<<<<<<<<<<<<<
