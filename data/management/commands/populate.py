@@ -68,8 +68,8 @@ deserunt mollit anim id est laborum."""[init:end]
 
 	def addCategory(self, noCategories):
 		for i in range(0, noCategories):
-			c = Category.objects.get_or_create(name="category" + str(i))[0]
-			c.tooltip = self.getParragraph(randint(0,50), randint(55, 100))
+			c = Category.objects.get_or_create(name="category" + str(i),
+				tooltip=self.getParragraph(randint(0,50), randint(55, 100)))[0]
 			c.save()
 	
 		# for category in Category.objects.all():
@@ -83,14 +83,14 @@ deserunt mollit anim id est laborum."""[init:end]
 
 	def addWorkflow(self, noWorkflows):
 		for i in range(0, noWorkflows):
-			w =  Workflow.objects.get_or_create(name="workflow" + str(i))[0]
-			w.description = self.getParragraph(randint(50, 90), randint(100, 140))
-			w.views = randint(0, 100)
-			w.downloads = randint(0, 100)
-			w.versionInit = str(randint(0,3)) + "." + str(randint(0,20))
-			w.client_ip = str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255))
-			w.keywords = self.getParragraph(randint(0,5), randint(0,20))
-			w.json = self.getJson()
+			w =  Workflow.objects.get_or_create(name="workflow" + str(i), 
+					views=randint(0, 100),
+					description=self.getParragraph(randint(50, 90), randint(100, 140)),
+					downloads=randint(0, 100),
+					versionInit=str(randint(0,3)) + "." + str(randint(0,20)),
+					client_ip=str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)),
+					keywords=self.getParragraph(randint(0,5), randint(0,20)),
+					json = self.getJson())[0]
 			w.category.add(Category.objects.get_or_create(name="category" + str(i))[0])
 			w.save()
 
