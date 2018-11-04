@@ -6,10 +6,12 @@ from data.models import Category, Workflow
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
+    readonly_fields = ('created',)
     prepopulated_fields = {'slug' : ('name',)}
 
 class WorkflowAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'views', 'downloads', 'client_ip', 'created')
+    readonly_fields = ('created',)
     prepopulated_fields = {'slug' : ('name',)}
 
 

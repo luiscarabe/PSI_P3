@@ -19,7 +19,7 @@ class modelsTests(TestCase):
 
     def test_Workflow(self):
         # They should be 13 workflows
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         self.assertEqual(13, len(workflows))
         for workflow in workflows:
             categories = workflow.category.all()
