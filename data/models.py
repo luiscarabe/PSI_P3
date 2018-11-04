@@ -10,7 +10,7 @@ from django.template.defaultfilters import slugify
 class Category(models.Model):
 	name = models.CharField(max_length=128, unique=True, blank=False)
 	slug = models.SlugField(unique=True)
-	created = models.DateTimeField(auto_now_add = True)
+	created = models.DateTimeField(auto_now_add = True, editable=True)
 	tooltip = models.CharField(max_length=128)
 
 	def save(self, *args, **kwargs):
