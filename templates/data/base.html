@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		{% block title %}
+			Workflows
+		{% endblock %}
+	</title>
+	{% block scripts %}
+	{% endblock %}
+</head>
+
+<body>
+	<div>
+		{% block header %}
+			<h2>Place a logo here</h2>
+		{% endblock %}
+	</div>
+	
+	<div>
+		{% block subheader %}
+		<!-- FIX -->
+			<form>
+				Search Workflow
+				<input type="search" name="name">
+				<input type="submit" name="submit" value="by Name">
+			</form>
+		{% endblock %}
+	</div>
+	
+	<div>
+		{% block content %}
+			The workflow could not be found.
+		{% endblock %}
+	</div>
+	
+	<div>
+		{% block footer %}
+			Luis C&aacute;rabe & Blanca Mart&iacute;n
+		{% endblock %}
+	</div>
+</body>
+</html>
+

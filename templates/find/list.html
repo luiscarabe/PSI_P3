@@ -1,0 +1,31 @@
+{% extends "../data/base.html" %}
+
+{% if _dict['category'] %}
+	{% block title %}
+		{{ _dict['category'].name }}
+	{% endblock %}
+{% endif %}
+
+{% if not _dict['error'] %}
+	{% block content %}
+		<div>
+			<h2>Categories</h2>
+			All
+			{% for category in _dict['category'] %}
+				{{category.name}}
+			{% endfor %}
+		</div>
+		<div>
+			{% if _dict['category'] %}
+				<h1>{{ _dict['category'].name }}</h1>
+			{% else %}
+				<h1>Workflows</h1>
+			{% endif %}
+
+			{% for workflow in _dict['workflow'] %}
+				{{workflow.name}}:{{workflow.description}}
+			{% endfor %}
+		</div>
+	{% endblock %}
+{% endif %}
+
