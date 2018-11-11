@@ -6,26 +6,27 @@
 	{% endblock %}
 {% endif %}
 
-{% if not _dict['error'] %}
-	{% block content %}
-		<div>
-			<h2>Categories</h2>
-			All
-			{% for category in _dict['category'] %}
-				{{category.name}}
-			{% endfor %}
-		</div>
-		<div>
-			{% if _dict['category'] %}
-				<h1>{{ _dict['category'].name }}</h1>
-			{% else %}
-				<h1>Workflows</h1>
-			{% endif %}
-
+{% block content %}
+	<div>
+		<h2>Categories</h2>
+		All
+		{% for category in _dict['category'] %}
+			{{category.name}}
+		{% endfor %}
+	</div>
+	<div>
+		{% if _dict['category'] %}
+			<h1>{{ _dict['category'].name }}</h1>
+		{% else %}
+			<h1>Workflows</h1>
+		{% endif %}
+		{% if _dict['result'] != False %}
 			{% for workflow in _dict['workflow'] %}
-				{{workflow.name}}:{{workflow.description}}
+				{{workflow.name}}:{{workflow.description | truncate(255)}}
 			{% endfor %}
-		</div>
-	{% endblock %}
-{% endif %}
+		{% else %}
+			{{_dict['error']}}
+		{% endif %}
+	</div>
 
+{% endblock %}
