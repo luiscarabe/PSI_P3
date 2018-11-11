@@ -81,6 +81,8 @@ def workflow_detail(request, id, slug):
 
 def workflow_search(request, name):
 
+	# FIX hay que hacer algo con el POST????????? no entiendo
+
 	# Default values
 	found = True
 	error=""
