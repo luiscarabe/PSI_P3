@@ -27,9 +27,10 @@
 	<div>
 		{% block subheader %}
 		<!-- FIX -->
-			<form method="POST">
+			<form method="POST" action="{% url 'base' %}">
+				{% csrf_token %} 
 				Search Workflow
-				<input type="search" name="name">
+				<input type="text" name="name">
 				<input type="submit" name="submit" value="by Name">
 			</form>
 		{% endblock %}

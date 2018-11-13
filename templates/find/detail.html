@@ -1,24 +1,24 @@
 {% extends "../data/base.html" %}
 
-{% if _dict['result'] != False %}
+{% if result != False %}
 	{% block title %}
-		{{ _dict['workflow'].name }}
+		{{ workflow.name }}
 	{% endblock %}
 {% endif %}
 
 {% block content %}
 	<div>
-		{% if _dict['result'] != False %}
-			<h2>{{_dict.workflow.name}}</h2>
+		{% if result != False %}
+			<h2>{{workflow.name}}</h2>
 			<!-- FIX -->
-			{% for category in _dict['workflow'].category %}
-				<label>{{ category }}</label>
+			{% for categories in category %}
+				<label>{{ categories.name }}</label>
 			{% endfor %}
-			<b>KeyWords:</b>{{_dict['workflow'].keywords}}
-			<b>Description:</b>_dict['workflow'].description}}
+			<b>KeyWords:</b>{{workflow.keywords}}
+			<b>Description:</b>{{workflow.description}}
 		{% else %}
 			<h2> The workflow could not be downloaded.</h2>
-			Error: {{ _dict['error']}}
+			Error: {{ error}}
 	</div>
 
 	{% endif %}

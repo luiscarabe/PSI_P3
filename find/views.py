@@ -11,7 +11,8 @@ from data.models import Category, Workflow
 
 import json
 
-def workflow_list(request, category_slug = False):
+def workflow_list(request, category_slug = None):
+	workflows = None
 
 	# Search for all categories
 	categories = Category.objects.all()
@@ -19,10 +20,11 @@ def workflow_list(request, category_slug = False):
 
 	# Check if we are searching a specific category
 	# In case not...
-	if (category_slug == False 	or category_slug == None ):
+	if category_slug == None:
 		category = None
 		# List of all workflows
 		workflows = Workflow.objects.all()
+		print workflows.count()
 		if workflows.count() == 0:
 			found = False
 			error = "No Workflows found!"
@@ -39,6 +41,7 @@ def workflow_list(request, category_slug = False):
 			category = None
 			found = False
 			error = "Category with slug '" + category_slug + "' does not exist"
+		
 		# If there is no workflows in some category
 		if workflows.count()==0 and found == True:
 			found = False
@@ -73,7 +76,7 @@ def workflow_detail(request, id, slug):
 
 	# Create the dictionary
 	_dict = {}
-	_dict['result'] = result
+	_dict['result'] = found
 	_dict['workflow'] = workflow
 	_dict['error'] = error
 
@@ -98,7 +101,7 @@ def workflow_search(request, name):
 
 	# Create the dictionary
 	_dict = {}
-	_dict['result'] = result
+	_dict['result'] = found
 	_dict['workflow'] = workflow
 	_dict['error'] = error
 
