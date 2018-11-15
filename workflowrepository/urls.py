@@ -9,7 +9,7 @@ from data import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^base/', views.base, name='base'),
-		url(r'', include('find.urls', namespace='find')),
+    url(r'', include('find.urls', namespace='find')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

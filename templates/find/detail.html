@@ -11,10 +11,10 @@
 		{% if result != False %}
 			<h2>{{workflow.name}}</h2>
 			<!-- FIX -->
-			{% for categories in category %}
-				<label>{{ categories.name }}</label>
+			{% for cat in workflow.category.all %}
+				<label>{{ cat.name }}</label>
 			{% endfor %}
-			<b>KeyWords:</b>{{workflow.keywords}}
+			<b>KeyWords:</b>{{workflow.keywords}}<br>
 			<b>Description:</b>{{workflow.description}}
 		{% else %}
 			<h2> The workflow could not be downloaded.</h2>
