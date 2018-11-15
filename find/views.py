@@ -41,7 +41,7 @@ def workflow_list(request, category_slug = None):
 			category = None
 			found = False
 			error = "Category with slug '" + category_slug + "' does not exist"
-		
+
 		# If there is no workflows in some category
 		if workflows.count()==0 and found == True:
 			found = False
@@ -67,7 +67,7 @@ def workflow_detail(request, id, slug):
 	# Find workflow with slug given
 	try:
 		# Fix, el enunciado habla de id, pero el model Workflow no tiene id!!!
-		workflow = Workflow.objects.get(slug = slug)
+		workflow = Workflow.objects.get(id = id)
 	except ObjectDoesNotExist:
 		# Workflow does not exist
 		workflow = None
@@ -83,8 +83,6 @@ def workflow_detail(request, id, slug):
 	return render(request, 'find/detail.html', _dict)
 
 def workflow_search(request, name):
-
-	# FIX hay que hacer algo con el POST????????? no entiendo
 
 	# Default values
 	found = True

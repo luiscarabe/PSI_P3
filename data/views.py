@@ -2,12 +2,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView
-from data.forms import BaseForm
+from find import views
 
 # Create your views here.
 def base(request):
 	if request.method == 'POST':
+		return views.workflow_search(request, request.POST['name'])
 		#return redirect('workflow_search', name=request.POST['name'])
-		return redirect('/workflow_search/' + request.POST['name'])
+		# return redirect('find:workflow_search',  name=request.POST['name'])
 	return render(request, 'data/base.html')
