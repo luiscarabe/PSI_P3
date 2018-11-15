@@ -7,12 +7,12 @@
 {% endif %}
 
 {% block content %}
-	<div>
+	<div id="main">
 		{% if result != False %}
 			<h2>{{workflow.name}}</h2>
 			<!-- FIX -->
 			{% for cat in workflow.category.all %}
-				<label>{{ cat.name }}</label>
+				<a href="{% url 'find:workflow_list_by_category' cat.slug %}">{{ cat.name }}</a><br>
 			{% endfor %}
 			<b>KeyWords:</b>{{workflow.keywords}}<br>
 			<b>Description:</b>{{workflow.description}}

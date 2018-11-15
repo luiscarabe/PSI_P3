@@ -21,13 +21,13 @@
 </head>
 
 <body>
-	<div>
+	<div id="header">
 		{% block header %}
 			<a href="{% url 'find:workflow_list' %}"> <h2>Place a logo here</h2> </a>
 		{% endblock %}
 	</div>
 
-	<div>
+	<div id="subheader">
 		{% block subheader %}
 		<!-- FIX -->
 			<form method="POST" action="{% url 'base' %}">
@@ -39,13 +39,13 @@
 		{% endblock %}
 	</div>
 
-	<div>
+	<div id="content">
 		{% block content %}
 			The workflow could not be found.
 		{% endblock %}
 	</div>
 
-	<div>
+	<div id="footer">
 		{% block footer %}
 			Luis C&aacute;rabe & Blanca Mart&iacute;n
 		{% endblock %}

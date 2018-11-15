@@ -7,16 +7,16 @@
 {% endif %}
 
 {% block content %}
-	<div>
+	<div id="sidebar">
 		<h2>Categories</h2>
 			<a href="{% url 'find:workflow_list' %}">All </a><br>
 		{% for cat in categories %}
 				<a href="{% url 'find:workflow_list_by_category' cat.slug %}">{{ cat.name }}</a><br>
 		{% endfor %}
 	</div>
-	<div>
-		{% if cat %}
-			<h1>{{ cat.name }}</h1>
+	<div id="main">
+		{% if category %}
+			<h1>{{ category.name }}</h1>
 		{% else %}
 			<h1>Workflows</h1>
 		{% endif %}
