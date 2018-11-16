@@ -30,4 +30,4 @@ class modelsTests(TestCase):
             except Category.DoesNotExist:
                 self.assertTrue(False, "category: %s does not exist" %
                                 category.slug )
-            print("checked: %s" % workflow.name)w
+            print("checked: %s" % workflow.name)

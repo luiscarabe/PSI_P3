@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+import django, os
+
 from django.shortcuts import render
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
-import django, os
 from data.models import Category, Workflow
 
-import json
 
 def workflow_list(request, category_slug = None):
+	page = request.GET.get('page', 1)
 	workflows = None
 
 	# Search for all categories
@@ -23,19 +26,26 @@ def workflow_list(request, category_slug = None):
 	if category_slug == None:
 		category = None
 		# List of all workflows
-		workflows = Workflow.objects.all()
-		print workflows.count()
-		if workflows.count() == 0:
+		workflow_list = Workflow.objects.all()
+		if workflow_list.count() == 0:
 			found = False
 			error = "No Workflows found!"
 		else:
+			paginator = Paginator(workflow_list, 10)
 			error = ""
+			try:
+				workflows = paginator.page(page)
+			except PageNotAnInteger:
+				workflows = paginator.page(1)
+			except EmptyPage:
+				paginator = paginator.page(paginator.num_pages)
 	# In other case...
 	else:
 		try:
 			# Find category with that slug and its workflows
 			category = Category.objects.get(slug = category_slug)
-			workflows = Workflow.objects.filter(category = category)
+			workflow_list = Workflow.objects.filter(category = category)
+			paginator = Paginator(workflow_list, 10)
 		except ObjectDoesNotExist:
 			# Category does not exist
 			category = None
@@ -43,12 +53,20 @@ def workflow_list(request, category_slug = None):
 			error = "Category with slug '" + category_slug + "' does not exist"
 
 		# If there is no workflows in some category
-		if workflows.count()==0 and found == True:
+		if workflow_list.count()==0 and found == True:
 			found = False
 			error = "No Workflows in this category!"
 		else:
 			found = True
 			error = ""
+			paginator = Paginator(workflow_list, 10)
+			error = ""
+			try:
+				workflows = paginator.page(page)
+			except PageNotAnInteger:
+				workflows = paginator.page(1)
+			except EmptyPage:
+				paginator = paginator.page(paginator.num_pages)
 
 	# Create the dictionary
 	_dict = {'category' : category,

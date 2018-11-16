@@ -20,7 +20,7 @@
 		{% else %}
 			<h1>Workflows</h1>
 		{% endif %}
-		{% if result != False %}
+		{% if result %}
 			{% for w in workflows %}
 				<a href="{% url 'find:workflow_detail' w.id w.slug %}">{{w.name}}</a>:{{w.description | truncatechars:255}}<br>
 			{% endfor %}
@@ -28,5 +28,28 @@
 			{{error}}
 		{% endif %}
 	</div>
+
+	{% if workflows.has_other_pages %}
+  <ul class="pagination" style="float: left;">
+    {% if workflows.has_previous %}
+      <li><a href="?page={{ workflows.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in workflows.paginator.page_range %}
+      {% if workflows.number == i %}
+        <li class="pure-menu-active"><span>{{ i }}</span></li>
+      {% else %}
+        <li class="pure-menu"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if workflows.has_next %}
+      <li><a href="?page={{ workflows.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
 
 {% endblock %}
