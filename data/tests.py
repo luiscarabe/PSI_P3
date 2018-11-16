@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+
 from unittest import TestCase
-from data.models import Category, Workflow
+from data.models import Category, WorkFlow
 from data.management.commands.populate import Command, CATEGORY, WORKFLOW
 # python manage.py tests data.tests
 
@@ -19,7 +19,7 @@ class modelsTests(TestCase):
 
     def test_Workflow(self):
         # They should be 13 workflows
-        workflows = Workflow.objects.all()
+        workflows = WorkFlow.objects.all()
         self.assertEqual(13, len(workflows))
         for workflow in workflows:
             categories = workflow.category.all()
@@ -30,4 +30,4 @@ class modelsTests(TestCase):
             except Category.DoesNotExist:
                 self.assertTrue(False, "category: %s does not exist" %
                                 category.slug )
-            print("checked: %s" % workflow.name)
+            print("checked: %s" % workflow.name)w
