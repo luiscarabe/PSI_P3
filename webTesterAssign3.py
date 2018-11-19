@@ -127,6 +127,9 @@ class workflowTester(unittest.TestCase):
         self.selectWorkflow(self.categoryWorkflow1.name)
         # search
         self.seeHome(WAITFOR)
+        # WE HAVE CHANGED THE WORKFLOW'S SLUG FOR ITS NAME,
+        # BECAUSE THAT IS WHAT WE WERE TOLD TO IMPLEMENT
+        # THE SEARCH ACCORDING TO
         self.searchWorkflow(SEARCH_TEXTBOX_NAME,
                             SEARCH_BUTTOM_NAME,
                             self.workflow1.name)
