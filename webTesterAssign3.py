@@ -19,7 +19,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "workflowrepository.settings")
 import django
 django.setup()
 from data.management.commands.populate import Command
-from data.models import Category, WorkFlow
+from data.models import Category, Workflow
 
 ID_CATEGORY = "id_category"
 ID_DESCRIPTION = "id_description"
@@ -30,10 +30,11 @@ SEARCH_TEXTBOX_NAME='key'
 SEARCH_BUTTOM_NAME='byName'
 LABEL_UPLOAD_WORFLOW = "Upload workflow"
 
-CHROMEDRIVER="/home/roberto/bin/chromedriver"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CHROMEDRIVER=os.path.join(BASE_DIR, "chromedriver")
 WAITFOR = 1
 BASE_LOCAL_URL = "http://127.0.0.1:8000/"
-BASE_REMOTE_URL = "https://frozen-earth-51137.herokuapp.com/"
+BASE_REMOTE_URL = "https://radiant-reef-12536.herokuapp.com/"
 BASE_URL = BASE_REMOTE_URL
 #DO NOT MODIFIED THE CODE BELLOW THIS POINT
 
@@ -45,7 +46,7 @@ class workflowTester(unittest.TestCase):
         print ("Setup")
 #        self.driver = webdriver.Firefox()
         self.driver = webdriver.Chrome(self.chromeDriver)
-        self.base_url = BASE_URL 
+        self.base_url = BASE_URL
 
     def find_element_by_id(self,_id,value,waitFor=WAITFOR):
         self.driver.find_element_by_id(_id).clear()
@@ -86,7 +87,7 @@ class workflowTester(unittest.TestCase):
         self.CATEGORYNAME1 = categories[0].name
         self.CATEGORYNAME2 = categories[1].name
 
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         self.workflow1 = workflows[0]
         self.categoryWorkflow1 = \
             Category.objects.filter(workflow=self.workflow1)[0]
