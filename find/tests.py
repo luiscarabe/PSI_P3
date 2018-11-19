@@ -48,12 +48,12 @@ class FindTests(TestCase):
                                     follow=True)
 
         # Check that all categories and workflow are in the returned page
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         self.assertEqual(13, len(workflows))
 
         # if pagination implemented fill free to use
         # for workflow in workflows[:10]:
-        for workflow in workflows:
+        for workflow in workflows[:10]:
             self.assertIn(workflow.name, str(response.content))
             print ("    assert: %s"%workflow.name)
 
@@ -65,14 +65,14 @@ class FindTests(TestCase):
         response = self._client.get(reverse(WORKFLOW_LIST_BY_CARTEGORY,
                                             kwargs={'category_slug':category.slug}))
 
-        workflows = WorkFlow.objects.filter(category=category)
+        workflows = Workflow.objects.filter(category=category)
         for itemName in workflows:
             self.assertIn("%s</a>"%itemName.name,str(response.content))
             print("    assert: %s in %s" % (itemName.name, category.name))
 
         # django Q objects have being designed to make complex queries
         # in this case search for objects NOT equal to a given category
-        workflows = WorkFlow.objects.filter(~Q(category=category))
+        workflows = Workflow.objects.filter(~Q(category=category))
         for itemName in workflows:
             self.assertNotIn("%s</a>"%itemName.name,str(response.content))
             print("    assert: %s NOT in %s" % (itemName.name, category.name))
@@ -81,7 +81,7 @@ class FindTests(TestCase):
         print "executing: ", sys._getframe().f_code.co_name
         # getworkflow detail
         baseName = WORKFLOW
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         for workflow in workflows:
             response = self._client.get(reverse(WORKFLOW_DETAIL,
                                                 kwargs={'id':workflow.id,
@@ -96,7 +96,7 @@ class FindTests(TestCase):
     def test_3_workflow_download(self):
         #THIS TEST IS FOR THE 4TH ASSIGNMENT
         print "executing: ", sys._getframe().f_code.co_name
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         workflow = workflows[0]
         # download workflow & get workflow again
         # downloads should be 1 after download
@@ -109,11 +109,11 @@ class FindTests(TestCase):
     def test_4_workflow_search(self):
         #search for a workflow workflow_search/
         print "executing: ", sys._getframe().f_code.co_name
-        workflows = WorkFlow.objects.all()
+        workflows = Workflow.objects.all()
         for workflow in workflows:
             response = self._client.post(reverse(WORKFLOW_SEARCH),
                                                 {'byName': 'byName',
-                                                 'key': workflow.slug})
+                                                 'key': workflow.name})
             print ("Search for workflow %s" % workflow.slug)
             self.assertIn(workflow.name,str(response.content))
             self.assertIn(workflow.description,

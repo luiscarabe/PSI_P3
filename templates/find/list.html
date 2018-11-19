@@ -9,9 +9,9 @@
 {% block content %}
 	<div id="sidebar">
 		<h2>Categories</h2>
-			<a href="{% url 'find:workflow_list' %}">All </a><br>
+			<a href="{% url 'workflow_list' %}">All </a><br>
 		{% for cat in categories %}
-				<a href="{% url 'find:workflow_list_by_category' cat.slug %}">{{ cat.name }}</a><br>
+				<a href="{% url 'workflow_list_by_category' cat.slug %}">{{ cat.name }}</a><br>
 		{% endfor %}
 	</div>
 	<div id="main">
@@ -22,7 +22,7 @@
 		{% endif %}
 		{% if result %}
 			{% for w in workflows %}
-				<a href="{% url 'find:workflow_detail' w.id w.slug %}">{{w.name}}</a>:{{w.description | truncatechars:255}}<br>
+				<a href="{% url 'workflow_detail' w.id w.slug %}">{{w.name}}</a>:{{w.description | truncatechars:255}}<br>
 			{% endfor %}
 		{% else %}
 			{{error}}

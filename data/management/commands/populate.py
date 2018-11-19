@@ -65,14 +65,14 @@ deserunt mollit anim id est laborum."""[init:end]
 		# delete all
 		# workflows and  categories
 		# ADD CODE HERE
-		
+
 
 	def addCategory(self, noCategories):
 		for i in range(0, noCategories):
 			c = Category.objects.get_or_create(name="category " + str(i),
 				tooltip=self.getParragraph(randint(0,50), randint(55, 100)))[0]
 			c.save()
-	
+
 		# for category in Category.objects.all():
 		# 	for workflow in Workflow.objects.filter(category=category):
 		# 		print("- {0} - {1}".format(str(category), str(workflow)))
@@ -87,13 +87,13 @@ deserunt mollit anim id est laborum."""[init:end]
 			r = randint(0, Category.objects.count()-1)
 			nameaux = "workflow " + str(i) + "-" + str(r)
 			viewsaux = randint(0, 100)
-			descriptionaux = self.getParragraph(randint(50, 90), randint(100, 140))
+			descriptionaux = self.getParragraph(randint(50, 80), randint(100, 140))
 			downloadsaux = randint(0, 100)
 			versionInitaux = str(randint(0,3)) + "." + str(randint(0,20))
 			client_ipaux = str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255))
 			keywordsaux = self.getParragraph(randint(0,5), randint(0,20))
 			jsonaux = self.getJson()
-			w =  Workflow.objects.get_or_create(name=nameaux, 
+			w =  Workflow.objects.get_or_create(name=nameaux,
 					views=viewsaux,
 					description=descriptionaux,
 					downloads=downloadsaux,
@@ -265,5 +265,3 @@ deserunt mollit anim id est laborum."""[init:end]
 			# and so on. Not only that creating such commands gives you a very succinct,
 			# boilterplate-free way of writing custom management scripts, it also gives
 			# you a natural location to house them, per application.
-
-

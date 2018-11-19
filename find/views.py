@@ -100,7 +100,7 @@ def workflow_detail(request, id, slug):
 
 	return render(request, 'find/detail.html', _dict)
 
-def workflow_search(request, name):
+def workflow_search(request):
 
 	# Default values
 	found = True
@@ -108,12 +108,12 @@ def workflow_search(request, name):
 
 	# Find workflow with name given
 	try:
-		workflow = Workflow.objects.get(name = name)
+		workflow = Workflow.objects.get(name = request.POST['key'])
 	except ObjectDoesNotExist:
 		# Workflow does not exist
 		workflow = None
 		found = False
-		error = "Workflow with name '" + name + "' does not exist"
+		error = "Workflow with name '" + request.POST['key'] + "' does not exist"
 
 	# Create the dictionary
 	_dict = {}

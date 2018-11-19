@@ -23,7 +23,7 @@
 <body>
 	<div id="header">
 		{% block header %}
-			<a href="{% url 'find:workflow_list' %}"> <h2>Place a logo here</h2> </a>
+			<a href="{% url 'workflow_list' %}"> <h2>Home</h2> </a>
 		{% endblock %}
 	</div>
 
@@ -33,7 +33,7 @@
 			<form method="POST" action="{% url 'base' %}">
 				{% csrf_token %}
 				Search Workflow
-				<input type="text" name="name">
+				<input type="text" name="key">
 				<input type="submit" name="submit" value="by Name">
 			</form>
 		{% endblock %}
