@@ -85,23 +85,22 @@ deserunt mollit anim id est laborum."""[init:end]
 	def addWorkflow(self, noWorkflows):
 		for i in range(0, noWorkflows):
 			r = randint(0, Category.objects.count()-1)
-			nameaux = "workflow " + str(i) + "-" + str(r)
-			viewsaux = randint(0, 100)
-			descriptionaux = self.getParragraph(randint(50, 80), randint(100, 140))
-			downloadsaux = randint(0, 100)
-			versionInitaux = str(randint(0,3)) + "." + str(randint(0,20))
-			client_ipaux = str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255))
-			keywordsaux = self.getParragraph(randint(0,5), randint(0,20))
-			jsonaux = self.getJson()
-			w =  Workflow.objects.get_or_create(name=nameaux,
-					views=viewsaux,
-					description=descriptionaux,
-					downloads=downloadsaux,
-					versionInit=versionInitaux,
-					client_ip=client_ipaux,
-					keywords=keywordsaux,
-					json = jsonaux)[0]
-			w.category.add(get_object_or_404(Category, name="category " + str(i % Category.objects.count())))
+			name = "workflow " + str(i)
+			views = randint(0, 100)
+			description = self.getParragraph(randint(50, 80), randint(100, 140))
+			downloads = randint(0, 100)
+			versionInit = str(randint(0,3)) + "." + str(randint(0,20))
+			client_ip = str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255))
+			keywords = self.getParragraph(randint(0,5), randint(0,20))
+			json = self.getJson()
+			w =  Workflow.objects.get_or_create(name=name,
+					views=views,
+					description=description,
+					downloads=downloads,
+					versionInit=versionInit,
+					client_ip=client_ip,
+					keywords=keywords,
+					json = json)[0]
 			w.category.add(get_object_or_404(Category, name="category " + str(r)))
 			w.save()
 

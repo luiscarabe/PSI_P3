@@ -25,12 +25,12 @@ def workflow_given_category(categoryname):
 def category_given_workflow(workflowslug):
 	try:
 		q = Workflow.objects.get(slug = workflowslug)
-		return q.category.slug
+		return q.category.all()
 	except ObjectDoesNotExist:
 		return "Workflow with slug '"+ workflowslug +"'  does not exist"
 
-
 for i in range(1, 3):
+	print "Creating category " + str(i) + "..."
 	try:
 		c = Category.objects.get(name = "category " + str(i))
 	except ObjectDoesNotExist:
@@ -39,6 +39,7 @@ for i in range(1, 3):
 
 for i in range(1, 4):
 	for j in range(1, 3):
+		print "Creating workflow " + str(j) + str(i) + "..."
 		try:
 			w = Workflow.objects.get(name = "workflow " + str(j) + str(i))
 			w.category.add(Category.objects.get(name = "category " + str(j)))
@@ -47,8 +48,20 @@ for i in range(1, 4):
 			w.save()
 			w.category.add(Category.objects.get(name = "category " + str(j)))
 
+print "--------------------------------------------"
+print "Searching workflow associated to category 1..."
+query = workflow_given_category("category 1")
+for q in query:
+	print q.name
 
-print workflow_given_category("category 1")
-print category_given_workflow("workflow-1")
-print category_given_workflow("workflow-10")
+print "Searching category of workflow-11..."
+query = category_given_workflow("workflow-11")
+for q in query:
+	print q.slug
+
+# In our case workflow-10 does exist
+print "Searching category of workflow-10..."
+query = category_given_workflow("workflow-10")
+for q in query:
+	print q.slug
 
