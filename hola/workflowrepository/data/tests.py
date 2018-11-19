@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 from data.models import Category, Workflow
 from data.management.commands.populate import Command, CATEGORY, WORKFLOW
