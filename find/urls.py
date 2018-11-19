@@ -1,10 +1,12 @@
+# Blanca Martin and Luis Carabe pair number 10
+
 # workflowrepository URL Configuration
 
 from django.conf.urls import url
 from find import views
 
-# Si algo va mal revisar
 
+# All urls for workflow lists/search/detail
 urlpatterns = [
     url(r'^$', views.workflow_list, name='workflow_list'),
     url(r'^workflow_list/(?P<category_slug>[-\w]+)/$', views.workflow_list, name='workflow_list_by_category'),

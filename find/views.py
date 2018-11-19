@@ -1,3 +1,5 @@
+# Blanca Martin and Luis Carabe pair number 10
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -82,9 +84,8 @@ def workflow_detail(request, id, slug):
 	found = True
 	error=""
 
-	# Find workflow with slug given
+	# Find workflow with id given
 	try:
-		# Fix, el enunciado habla de id, pero el model Workflow no tiene id!!!
 		workflow = Workflow.objects.get(id = id)
 	except ObjectDoesNotExist:
 		# Workflow does not exist

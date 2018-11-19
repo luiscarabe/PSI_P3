@@ -1,3 +1,5 @@
+# Blanca Martin and Luis Carabe pair number 10
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -11,7 +13,7 @@ class Category(models.Model):
 	name = models.CharField(max_length=128, unique=True, blank=False)
 	# Slug of the category
 	slug = models.SlugField(unique=True)
-	# Date of creation 
+	# Date of creation
 	created = models.DateTimeField(auto_now_add = True, editable=True)
 	# Description
 	tooltip = models.CharField(max_length=128)

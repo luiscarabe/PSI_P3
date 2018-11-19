@@ -1,14 +1,7 @@
-#populate database
-# This code has to be placed in a file within the
-# data/management/commands directory in your project.
-# If that directory doesn't exist, create it.
-# The name of the script is the name of the custom command,
-# so let's call it populate.py. Another thing that has to be done
-# is creating __init__.py files in both the management and commands
-# directories, because these have to be Python packages.
-#
-# execute python manage.py  populate
+# Blanca Martin and Luis Carabe pair number 10
 
+#populate database
+# execute python manage.py  populate
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
@@ -55,61 +48,51 @@ deserunt mollit anim id est laborum."""[init:end]
 		self.addWorkflow(13) # add 13 workflows
 
 	def cleanDatabase(self):
+		# Delete all workflows
 		for workflow in Workflow.objects.all():
 			workflow.delete()
 
+		# Delete all categories
 		for category in Category.objects.all():
 			for workflow in Workflow.objects.filter(category=category):
 				workflow.delete()
 			category.delete()
-		# delete all
-		# workflows and  categories
-		# ADD CODE HERE
 
 
 	def addCategory(self, noCategories):
+		# Create category with name category x
+		# being x a number between 0 and noCategories
 		for i in range(0, noCategories):
 			c = Category.objects.get_or_create(name="category " + str(i),
 				tooltip=self.getParragraph(randint(0,50), randint(55, 100)))[0]
 			c.save()
 
-		# for category in Category.objects.all():
-		# 	for workflow in Workflow.objects.filter(category=category):
-		# 		print("- {0} - {1}".format(str(category), str(workflow)))
-
-		# create 5 categories <<<<<<<<<<<<<<<<<<<<<<<
-		# baseName, call objects
-		# print Category.objects.all()
-
 
 	def addWorkflow(self, noWorkflows):
+
+		# Create workflow, all numbers involved are random ints
 		for i in range(0, noWorkflows):
+			# r is a randint between 0 and (number of categories -1)
 			r = randint(0, Category.objects.count()-1)
-			name = "workflow " + str(i)
-			views = randint(0, 100)
-			description = self.getParragraph(randint(50, 80), randint(100, 140))
-			downloads = randint(0, 100)
-			versionInit = str(randint(0,3)) + "." + str(randint(0,20))
-			client_ip = str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255))
-			keywords = self.getParragraph(randint(0,5), randint(0,20))
-			json = self.getJson()
-			w =  Workflow.objects.get_or_create(name=name,
-					views=views,
-					description=description,
-					downloads=downloads,
-					versionInit=versionInit,
-					client_ip=client_ip,
-					keywords=keywords,
-					json = json)[0]
+			
+			j = i
+			# We don't create workflow number 10
+			if i == 10:
+				j = noWorkflows
+			
+			w =  Workflow.objects.get_or_create(name="workflow " + str(j),
+					views=randint(0, 100),
+					description=self.getParragraph(randint(50, 80), randint(100, 140)),
+					downloads=randint(0, 100),
+					versionInit=str(randint(0,3)) + "." + str(randint(0,20)),
+					client_ip=str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)) + "." + str(randint(0,255)),
+					keywords=self.getParragraph(randint(0,5), randint(0,20)),
+					json = self.getJson())[0]
+			
+			# Add a random category to the workflow
 			w.category.add(get_object_or_404(Category, name="category " + str(r)))
 			w.save()
 
-		# create 13 workflows  <<<<<<<<<<<<<<<<<<<<<<
-		# assign them to random categories
-		# do not assign the sameworkflow to two o mote
-		# categories
-		# add apropriate code
-		# create fake json
 
 	def getJson(self):
 			return """[
