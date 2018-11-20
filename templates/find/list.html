@@ -1,6 +1,8 @@
+<!-- Blanca Martin and Luis Carabe pair number 10 -->
+
 {% extends "../data/base.html" %}
 
-<!-- If we are listing the workflows of a 
+<!-- If we are listing the workflows of a
 		 given category, the title is the category's name -->
 {% if category %}
 	{% block title %}
@@ -19,7 +21,7 @@
 	</div>
 
 	<div id="main">
-		<!-- If we are listling the workflows of a category, 
+		<!-- If we are listling the workflows of a category,
 				 we name that category -->
 		{% if category %}
 			<h1>{{ category.name }}</h1>

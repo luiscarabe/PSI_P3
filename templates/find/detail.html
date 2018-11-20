@@ -1,6 +1,8 @@
+<!-- Blanca Martin and Luis Carabe pair number 10 -->
+
 {% extends "../data/base.html" %}
 
-<!-- If there is a result, workflow is not null, 
+<!-- If there is a result, workflow is not null,
 		so the title is the workflow's name -->
 {% if result != False %}
 	{% block title %}
@@ -14,7 +16,6 @@
 		     the workflow information  -->
 		{% if result != False %}
 			<h2>{{workflow.name}}</h2>
-			<!-- FIX -->
 			{% for cat in workflow.category.all %}
 				<a href="{% url 'workflow_list_by_category' cat.slug %}">{{ cat.name }}</a><br>
 			{% endfor %}
